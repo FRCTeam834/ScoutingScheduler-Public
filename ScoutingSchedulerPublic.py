@@ -1,6 +1,6 @@
 # Author: Mohammad Durrani
 # Date: Friday, August 9th, 2019
-# Special Thanks: Dalton from FRC 66, Tyler from WPILip and 3512, Tim from 1257, and FRC Discord
+# Special Thanks: Dalton from FRC 66, Tyler from WPILip and 3512, Tim from 1257 and FRC Discord
 
 
 import gspread
@@ -9,23 +9,26 @@ from oauth2client.service_account import ServiceAccountCredentials
     #Authenticating accsess to google
 import sys
 
+
 #++++++++++++++++++++ Google Authentication ++++++++++++++++++++#
+try:
+    #printing debug message
+    print("Authenticating to Google Sheets/Google...\n\n")
 
-#printing debug message
-print("Authenticating to Google Sheets/Google...\n\n")
+    #setting scope (do not change)
+    scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
-#setting scope (do not change)
-scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
+    #setting credentials and authorizing credentials
+    creds = ServiceAccountCredentials.from_json_keyfile_name("######.json", scope)
+    gc = gspread.authorize(######)
 
-#setting credentials and authorizing credentials
-creds = ServiceAccountCredentials.from_json_keyfile_name("##########.json", scope)
-gc = gspread.authorize(####)
+    #opening worksheet and sheet1
+    wks = gc.open("#######").sheet1
 
-#opening worksheet and sheet1
-wks = gc.open("############").sheet1
-
-#finishing debug message
-print("Done!\n\n")
+    #finishing debug message
+    print("Done!\n\n")
+except:
+    sys.exit("There was a problem with Google Authentication!")
 
 #++++++++++++++++++++ Google Authentication ++++++++++++++++++++#
 
@@ -36,9 +39,10 @@ scoutingGroup = 0
 counter = 0
 groupNumCounter = 1
 scoutingCounter = 0
-numMatchesPerGroup = 0
 numMatchesCounter = 10
 qualCounter = 0
+groups=0.0
+numOfMatchPerGroup=0
 #++++++++++++++++++++ Declaring Variables ++++++++++++++++++++#
 
 
@@ -67,6 +71,10 @@ print("Done!\n\n")
 qualMatches = int(input("Enter the number of qualification matches: "))
 scouts = int(input("Enter the number of scouts (total): "))
 scoutsInGroup = int(input("How many people do you want scouting at a time: "))
+if scoutsInGroup>scouts:
+    sys.exit("The amount of scouts cannot be greater than the amount of scouts in a group!")
+else:
+    pass
 #++++++++++++++++++++ User Input ++++++++++++++++++++#
 
 
@@ -75,7 +83,7 @@ scoutsInGroup = int(input("How many people do you want scouting at a time: "))
 
     #Finding how many matches each group will scout
 
-#while the number of matches they are scouting is greater than 5 (Change this and the if statment outside of the while loop to lower the minimmum matches)
+#while the number of matches they are scouting is greater than 5 (Change this and the if statment outside of the while loop to lower the minimum matches)
 while numMatchesCounter > 5:
 
     #if the number of matches goes in cleanly (no decimals) and if so break and set the number of matches per group. otherwise, move the nummatch counter lower
@@ -87,13 +95,17 @@ while numMatchesCounter > 5:
 
 #if the number of matches per group have moved below 5, print error
 if numMatchesCounter < 5:
-    sys.exit("There is no way to distribute the groups evenly given the data. (the number of qualification amtches is not easily dividable by 5-10.)")
+    sys.exit("Given the amount of qualification matches, you cannot distribute the matches evenly between the scouts (In terms 5, 6, 7, 8, 9, or ten matchs periods). \nThe program is now exiting. If you want to retry, please change do it manually")
 
     #Finding how many matches each group will scout
 
 #calculation the number of groups
 groups = scouts / scoutsInGroup
-# ************BIG CALCULATIONS*********
+if (groups).is_integer():
+    pass
+else:
+    sys.exit("The group number is not an integer (exiting)")
+#++++++++++++++++++++ Calculations ++++++++++++++++++++#
 
 
 #++++++++++++++++++++ Moving the Data into Arrays ++++++++++++++++++++#

@@ -1,12 +1,12 @@
 # ScoutingScheduler-Public
 Makes scouting schedules. Thats it.
 
-#Packages needed:
+## Packages needed:
 -gspread
 -google-api-python-client
 -oauth2client
 
-#How to isntall:
+## How to isntall:
 1. Download or copy the .py file
 2. Install the appropriate packages onto your machine
 2. Create a Google Cloud account
@@ -33,5 +33,8 @@ Makes scouting schedules. Thats it.
 19. Change the ##### appropriately (msg me if you need more help)
 20. Run the file and it should work!
 
-#Features
+## Summary of Purpose
 Makes scouting schedules and takes them into google sheets
+
+## Future Changes
+Coming soon!

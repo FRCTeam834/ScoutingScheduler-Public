@@ -7,7 +7,7 @@ import gspread
     #Google sheets API client thing
 from oauth2client.service_account import ServiceAccountCredentials
     #Authenticating accsess to google
-
+import sys
 
 #++++++++++++++++++++ Google Authentication ++++++++++++++++++++#
 
@@ -87,7 +87,7 @@ while numMatchesCounter > 5:
 
 #if the number of matches per group have moved below 5, print error
 if numMatchesCounter < 5:
-    print("no work")
+    sys.exit("There is no way to distribute the groups evenly given the data. (the number of qualification amtches is not easily dividable by 5-10.)")
 
     #Finding how many matches each group will scout
 
